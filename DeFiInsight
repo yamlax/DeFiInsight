@@ -1,0 +1,26 @@
+# scripts/protocol_monitoring.py
+
+import pandas as pd
+
+def monitor_protocols(protocols_data):
+    """
+    Monitor and analyze DeFi protocol performance.
+
+    :param protocols_data: List of protocol data dictionaries
+    :return: DataFrame with protocol data
+    """
+    df = pd.DataFrame(protocols_data)
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    return df.describe()
+
+def plot_protocol_performance(df):
+    """
+    Plot protocol performance data.
+
+    :param df: DataFrame with protocol data
+    """
+    df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
+    df.plot(x='timestamp', y='performance', kind='line', title='Protocol Performance Over Time')
+    plt.xlabel('Time')
+    plt.ylabel('Performance')
+    plt.show()
